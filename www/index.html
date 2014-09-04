@@ -63,10 +63,20 @@
         <div class="app" ng-controller="geoCtrl">
 
             <h1>{{ firstName + " " + lastName }}</h1>
+            <p>latitude: {{latitude}}</p>
+            <p>longitude: {{longitude}}</p>
+            <p>altitude: {{altitude}}</p>
+            <p>accuracy: {{accuracy}}</p>
+            <p>altitudeAccuracy: {{altitudeAccuracy}}</p>
+            <p>heading: {{heading}}</p>
+            <p>speed: {{speed}}</p>
+            <p>timestamp: {{timestamp}}</p>
+            <p>error_code: {{error_code}}</p>
+            <p>error_message: {{error_message}}</p>
             <div id="deviceready" class="blink">
                 <p id="pfirst" class="event listening">Connecting to Device1</p>
                 <p class="event received">Device is Ready</p>
-                <button id="btn" type="button">Click Me!</button>
+                <button id="btn" type="button" ng-click="getCurrentPosition()">Click Me!</button>
             </div>
         </div>        
         
