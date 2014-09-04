@@ -85,6 +85,7 @@
 
         console.log('Received Event: ' + id);
     };
+    $.extend(app, angular.module("myApp", []));
     
 })(window.app = window.app || {});
 

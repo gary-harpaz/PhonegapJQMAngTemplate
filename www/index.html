@@ -57,19 +57,22 @@
                 document.write('<script  src="cordova.js"><\/script>');
             }
         </script>
+        <script src="scripts/angular.js"></script>
     </head>
-    <body>
-        <div class="app">
-            <h1>PhoneGap</h1>
+    <body ng-app="myApp">
+        <div class="app" ng-controller="geoCtrl">
+
+            <h1>{{ firstName + " " + lastName }}</h1>
             <div id="deviceready" class="blink">
                 <p id="pfirst" class="event listening">Connecting to Device1</p>
                 <p class="event received">Device is Ready</p>
                 <button id="btn" type="button">Click Me!</button>
             </div>
         </div>        
-        <script src="scripts/angular.js"></script>
+        
         <!--<script type="text/javascript" src="cordova.js"></script>-->
         <script type="text/javascript" src="js/index.js"></script>
+        <script src="js/geoCtrl.js"></script>
         <script type="text/javascript">
             window.app.initialize();
         </script>
