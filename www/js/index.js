@@ -16,46 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-//var app = {
-//    // Application Constructor
-//    initialize: function() {
-//        this.bindEvents();
-
-      
-        
-        
-//        $("#btn").click(function () {
-//            $("#pfirst").html("Stam!");
-//        });
-//    },
-//    // Bind Event Listeners
-//    //
-//    // Bind any events that are required on startup. Common events are:
-//    // 'load', 'deviceready', 'offline', and 'online'.
-//    bindEvents: function() {
-//        document.addEventListener('deviceready', this.onDeviceReady, false);
-//    },
-//    // deviceready Event Handler
-//    //
-//    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-//    // function, we must explicitly call 'app.receivedEvent(...);'
-//    onDeviceReady: function() {
-//        app.receivedEvent('deviceready');
-//    },
-//    // Update DOM on a Received Event
-//    receivedEvent: function(id) {
-//        var parentElement = document.getElementById(id);
-//        var listeningElement = parentElement.querySelector('.listening');
-//        var receivedElement = parentElement.querySelector('.received');
-
-//        listeningElement.setAttribute('style', 'display:none;');
-//        receivedElement.setAttribute('style', 'display:block;');
-
-//        console.log('Received Event: ' + id);
-//    }    
-
-    
-//};
 
 
 (function (app, undefined) {
@@ -65,11 +25,131 @@
 
 
 
-        $("#btn").click(function () {
-            $("#pfirst").html("Stam!");
+        //$("#btn").click(function () {
+        //    $("#pfirst").html("Stam!");
+        //});
+
+
+        /*
+        $("#navGeolocaion").click(
+            function () {
+                $.mobile.changePage("views/GeoView.html"
+                    , {
+                        dataUrl : "index.html#GeoView"
+                      }
+                    )
+            }
+            );*/
+        //disable jquery moile navigation
+
+        app.controller('geoCtrl',
+function ($scope, $rootScope) {
+    console.log('geoCtrl');
+    $scope.getCurrentPosition = function () {
+        navigator.geolocation.getCurrentPosition(
+        function (position) {
+            $.extend($scope, position.coords);
+            $scope.timestamp = position.timestamp;
+            $scope.error_code = "";
+            $scope.error_message = "";
+        },
+        function (positionErrorCallback) {
+            $scope.error_code = positionErrorCallback.code;
+            $scope.error_message = positionErrorCallback.message;
+        }
+       );
+    }
+    $scope.getslide = function () {
+        //  console.log('geoCtrl')
+        return $rootScope.slide;
+
+    }
+});
+
+
+        app.config(['$routeProvider', function ($routeProvide) {
+            $routeProvide
+             /*   
+             This is a sample of using routes with parameters
+             .when('/view/:name', { templateUrl: '/template/view.html', controller: viewCtrl })
+                .when('/view/message/:name', { templateUrl: '/template/message.html', controller: messageCtrl })*/
+                .when('/', { templateUrl: 'views/GeoView.html', controller: 'geoCtrl' })
+                .when('/login', { templateUrl: 'views/LoginView.html', controller: 'loginCtrl' })
+              //  .when('/Geo', { templateUrl: 'views/GeoView.html', controller: 'geoCtrl' })
+        }])
+        //global event handler  
+        .run(function ($rootScope, $window) {
+            $rootScope.slide = 'slide-left';
+
+            /*        $rootScope.$on('$routeChangeStart', function () {*/
+            /* $rootScope.$on('$locationChangeStart', function () {*/
+            $rootScope.$on('$routeChangeStart', function () {
+                //event button to move backward  
+                //  console.log('routeChangeStart');
+                $rootScope.back = function () {
+                    console.log('root scope back');
+                    $rootScope.slide = 'slide-right';
+                    $window.history.back();
+                }
+                //event button item list to move forward  
+                $rootScope.next = function () {
+                    console.log('root scope nex');
+                    $rootScope.slide = 'slide-left';
+                }
+            });
         });
+
+
+        //app.controller('geoCtrl', ['$scope','$rootScope',
+        //function ($scope, $rootScope) {
+        //    $scope.getCurrentPosition = function () {
+        //        navigator.geolocation.getCurrentPosition(
+        //        function (position) {
+        //            $.extend($scope, position.coords);
+        //            $scope.timestamp = position.timestamp;
+        //            $scope.error_code = "";
+        //            $scope.error_message = "";
+        //        },
+        //        function (positionErrorCallback) {
+        //            $scope.error_code = positionErrorCallback.code;
+        //            $scope.error_message = positionErrorCallback.message;
+        //        }
+        //       );
+        //    }
+        //    $scope.getslide = function ()
+        //    {
+        //        return $rootScope.slide;
+
+        //    }
+        //}]);
+
+
+
+
+        //app.controller('loginCtrl', ['$scope',,'$rootScope',
+        //function ($scope, $rootScope) {
+        //$scope.getCurrentPosition = function () {
+        //}
+        //$scope.getslide = function () {
+        //    return $rootScope.slide;
+
+        //}
+
+
+        app.controller('loginCtrl',
+       function ($scope, $rootScope) {
+           console.log('loginCtrl');
+           $scope.getCurrentPosition = function () {
+           }
+           $scope.getslide = function () {
+               return $rootScope.slide;
+
+           }
+       });
+
+
     };
-    app.bindEvents=function() {
+    app.bindEvents = function () {
         document.addEventListener('deviceready', this.onDeviceReady, false);
     };
     app.onDeviceReady = function () {
@@ -85,8 +165,14 @@
 
         console.log('Received Event: ' + id);
     };
-    $.extend(app, angular.module("myApp", []));
-    
+    $.extend(app, angular.module("myApp", ['ngRoute', 'ngAnimate']));
+
+
+
+
+
+
+
 })(window.app = window.app || {});
 
 

@@ -26,9 +26,23 @@
         <meta name="msapplication-tap-highlight" content="no" />
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
+
+        <link href="Content/jquery.mobile.theme-1.4.2.css" rel="stylesheet" />
+        <link href="Content/jquery.mobile.structure-1.4.2.css" rel="stylesheet" />
+        <link href="css/animation.css" rel="stylesheet" />
         <title>Hello World</title>
         <script src="scripts/jquery-1.8.0.js"></script>
+        <script type="text/javascript">
+            $(document).on("mobileinit", function () { //must load before jqm
+                // Reference: http://jquerymobile.com/demos/1.1.0/docs/api/globalconfig.html
+                $.extend($.mobile, {
+                    linkBindingEnabled: false,
+                    ajaxEnabled: false,
+                    hashListeningEnabled: false,
+                    pushStateEnabled: false
+                });
+            });
+        </script>
         <script src="scripts/jquery.mobile-1.4.2.js"></script>        
         <script type="text/javascript">
             //http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
@@ -56,11 +70,13 @@
                 // console.log('user mock services');
                 document.write('<script  src="cordova.js"><\/script>');
             }
+
+
         </script>
         <script src="scripts/angular.js"></script>
     </head>
     <body ng-app="myApp">
-        <div class="app" ng-controller="geoCtrl">
+   <!--     <div class="app" ng-controller="geoCtrl">
 
             <h1>{{ firstName + " " + lastName }}</h1>
             <p>latitude: {{latitude}}</p>
@@ -78,9 +94,55 @@
                 <p class="event received">Device is Ready</p>
                 <button id="btn" type="button" ng-click="getCurrentPosition()">Click Me!</button>
             </div>
-        </div>        
+        </div>  -->  
+
+        <!--   <div data-role="header" data-position="fixed" role="banner" class="ui-header ui-bar-a ui-header-fixed slidedown">
+                <h1 class="ui-title" role="heading" aria-level="1">Header</h1>
+                <div data-role="navbar" class="ui-navbar" role="navigation">
+                    <ul class="ui-grid-b">
+                        <li class="ui-block-a">
+                            <a data-role="button" id="navGeolocaion" class="ui-link ui-btn ui-shadow ui-corner-all" role="button">Geo</a>
+                        </li>
+                        <li class="ui-block-b">
+                            <a data-role="button" id="A2" class="ui-link ui-btn ui-shadow ui-corner-all" role="button">Login</a>
+                        </li>
+                        <li class="ui-block-c">
+                            <a data-role="button" id="A3" class="ui-link ui-btn ui-shadow ui-corner-all" role="button">Other</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>-->
+           <div data-role="page" id="page1">
+           <!--     <a data-role="button" id="dsgdsg" class="ui-link ui-btn ui-shadow ui-corner-all" role="button" href="GeoView.html">Geo</a>-->
+         <div data-role="header" data-position="fixed">
+                <h1>Header</h1>
+                <div data-role="navbar">
+                    <ul>
+                        <li>
+                            <a data-role="button" id="navGeolocaion" href="#/">Geo</a>
+                        </li>
+                        <li>
+                            <a data-role="button" id="navLogin" href="#/login">Login</a>
+                        </li>
+                        <li>
+                            <a data-role="button" id="navOther">Other</a>
+                        </li>
+                    </ul>
+                </div>
+            </div> 
+               <div data-role="content"   ng-view class="{{ getslide() }}"></div>
+            <!--<div style="position:relative;">
+                 
+            </div>           -->
+            <div data-role="footer" data-position="fixed">
+                <h1>Footer</h1>
+            </div>
+        </div>
+            
         
         <!--<script type="text/javascript" src="cordova.js"></script>-->
+        <script src="scripts/angular-route.js"></script>
+        <script src="scripts/angular-animate.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script src="js/geoCtrl.js"></script>
         <script type="text/javascript">
