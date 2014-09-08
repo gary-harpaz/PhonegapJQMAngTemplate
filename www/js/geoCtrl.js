@@ -1,5 +1,5 @@
 ﻿console.log('geoCtrl loaded');
-app.controllers["geoCtrl"]= function ($scope, $rootScope) {
+app.controllers["geoCtrl"] = function ($scope, $rootScope) {
     console.log('geoCtrl');
     $scope.getCurrentPosition = function () {
         navigator.geolocation.getCurrentPosition(
@@ -8,12 +8,12 @@ app.controllers["geoCtrl"]= function ($scope, $rootScope) {
             $scope.timestamp = position.timestamp;
             $scope.error_code = "";
             $scope.error_message = "";
-        },
-function (positionErrorCallback) {
-    $scope.error_code = positionErrorCallback.code;
-    $scope.error_message = positionErrorCallback.message;
-}
-);
+        }
+        , function (positionErrorCallback) {
+            $scope.error_code = positionErrorCallback.code;
+            $scope.error_message = positionErrorCallback.message;
+        }
+      );
     }
     $scope.getslide = function () {
         //  console.log('geoCtrl')
