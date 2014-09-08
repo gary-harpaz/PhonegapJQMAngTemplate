@@ -42,29 +42,7 @@
             );*/
         //disable jquery moile navigation
 
-        app.controller('geoCtrl',
-function ($scope, $rootScope) {
-    console.log('geoCtrl');
-    $scope.getCurrentPosition = function () {
-        navigator.geolocation.getCurrentPosition(
-        function (position) {
-            $.extend($scope, position.coords);
-            $scope.timestamp = position.timestamp;
-            $scope.error_code = "";
-            $scope.error_message = "";
-        },
-        function (positionErrorCallback) {
-            $scope.error_code = positionErrorCallback.code;
-            $scope.error_message = positionErrorCallback.message;
-        }
-       );
-    }
-    $scope.getslide = function () {
-        //  console.log('geoCtrl')
-        return $rootScope.slide;
 
-    }
-});
 
 
         app.config(['$routeProvider', function ($routeProvide) {
@@ -75,7 +53,7 @@ function ($scope, $rootScope) {
                 .when('/view/message/:name', { templateUrl: '/template/message.html', controller: messageCtrl })*/
                 .when('/', { templateUrl: 'views/GeoView.html', controller: 'geoCtrl' })
                 .when('/login', { templateUrl: 'views/LoginView.html', controller: 'loginCtrl' })
-              //  .when('/Geo', { templateUrl: 'views/GeoView.html', controller: 'geoCtrl' })
+            //  .when('/Geo', { templateUrl: 'views/GeoView.html', controller: 'geoCtrl' })
         }])
         //global event handler  
         .run(function ($rootScope, $window) {
@@ -100,52 +78,35 @@ function ($scope, $rootScope) {
         });
 
 
-        //app.controller('geoCtrl', ['$scope','$rootScope',
-        //function ($scope, $rootScope) {
-        //    $scope.getCurrentPosition = function () {
-        //        navigator.geolocation.getCurrentPosition(
-        //        function (position) {
-        //            $.extend($scope, position.coords);
-        //            $scope.timestamp = position.timestamp;
-        //            $scope.error_code = "";
-        //            $scope.error_message = "";
-        //        },
-        //        function (positionErrorCallback) {
-        //            $scope.error_code = positionErrorCallback.code;
-        //            $scope.error_message = positionErrorCallback.message;
-        //        }
-        //       );
-        //    }
-        //    $scope.getslide = function ()
-        //    {
-        //        return $rootScope.slide;
 
-        //    }
-        //}]);
+        var lazyloadController = function (filename, ctrlname, deps) {
+            var is_initialized = false;
+            var ctrl_implementation = undefined;
+            deps.push(
+                    function (args) {
+                        if (!is_initialized) {
+                            $script(filename, ctrlname);
+                            var parent_args = arguments;
 
+                            $script.ready(ctrlname, function () {
+                                is_initialized = true;
+                                ctrl_implementation = app.controllers[ctrlname];
+                                ctrl_implementation.apply(this, parent_args);
+                            })
 
+                        }
+                        else
+                            ctrl_implementation.apply(this, arguments);
+                    }
+                );
+            app.controller(ctrlname, deps);
 
-
-        //app.controller('loginCtrl', ['$scope',,'$rootScope',
-        //function ($scope, $rootScope) {
-        //$scope.getCurrentPosition = function () {
-        //}
-        //$scope.getslide = function () {
-        //    return $rootScope.slide;
-
-        //}
+        }
 
 
-        app.controller('loginCtrl',
-       function ($scope, $rootScope) {
-           console.log('loginCtrl');
-           $scope.getCurrentPosition = function () {
-           }
-           $scope.getslide = function () {
-               return $rootScope.slide;
+        lazyloadController('js/geoCtrl.js', 'geoCtrl', ['$scope', '$rootScope']);
+        lazyloadController('js/loginCtrl.js', 'loginCtrl', ['$scope', '$rootScope']);
 
-           }
-       });
 
 
     };
@@ -166,6 +127,8 @@ function ($scope, $rootScope) {
         console.log('Received Event: ' + id);
     };
     $.extend(app, angular.module("myApp", ['ngRoute', 'ngAnimate']));
+    app.controllers = {};
+
 
 
 
