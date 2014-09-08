@@ -75,11 +75,12 @@
                     $rootScope.slide = 'slide-left';
                 }
             });
+
         });
 
 
 
-        var lazyloadController = function (filename, ctrlname, deps) {
+      /*  var lazyloadController = function (filename, ctrlname, deps) {
             var is_initialized = false;
             var ctrl_implementation = undefined;
             deps.push(
@@ -104,18 +105,22 @@
         }
 
 
+
         lazyloadController('js/geoCtrl.js', 'geoCtrl', ['$scope', '$rootScope']);
-        lazyloadController('js/loginCtrl.js', 'loginCtrl', ['$scope', '$rootScope']);
+        lazyloadController('js/loginCtrl.js', 'loginCtrl', ['$scope', '$rootScope']);*/
 
 
 
     };
+
     app.bindEvents = function () {
         document.addEventListener('deviceready', this.onDeviceReady, false);
     };
+  
     app.onDeviceReady = function () {
         app.receivedEvent('deviceready');
     };
+
     app.receivedEvent = function (id) {
         var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
