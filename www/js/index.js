@@ -40,43 +40,57 @@
                     )
             }
             );*/
-        //disable jquery moile navigation
-
-
-
+        
 
         app.config(['$routeProvider', function ($routeProvide) {
-            $routeProvide
+            
+            var nav_routes = app.nav_routes;
+            for (var i = 0; i < nav_routes.length; i++) {
+                $routeProvide.when(nav_routes[i].hash, nav_routes[i].route_info);                
+            }
+
+
+          
+
+            /*$routeProvide*/
              /*   
              This is a sample of using routes with parameters
              .when('/view/:name', { templateUrl: '/template/view.html', controller: viewCtrl })
                 .when('/view/message/:name', { templateUrl: '/template/message.html', controller: messageCtrl })*/
-                .when('/', { templateUrl: 'views/GeoView.html', controller: 'geoCtrl' })
-                .when('/login', { templateUrl: 'views/LoginView.html', controller: 'loginCtrl' })
-            //  .when('/Geo', { templateUrl: 'views/GeoView.html', controller: 'geoCtrl' })
+
+
+              /*  .when('/', { templateUrl: 'views/GeoView.html', controller: 'geoCtrl' })
+                .when('/login', { templateUrl: 'views/LoginView.html', controller: 'loginCtrl' })    */
         }])
-        //global event handler  
-        .run(function ($rootScope, $window) {
-            $rootScope.slide = 'slide-left';
+//global event handler  
+    .run(['$rootScope', '$window', '$route', '$location', function ($rootScope, $window, $route, $location) {
+        $rootScope.slide = 'slide-left';
+       
+       $rootScope.$on('$routeChangeStart', function () {
+           //event button to move backward  
+           //  console.log('routeChangeStart');
+           $rootScope.back = function () {
+               console.log('root scope back');
+               $rootScope.slide = 'slide-right';
+               $window.history.back();
+           }
+           //event button item list to move forward  
+           $rootScope.next = function () {
+               console.log('root scope nex');
+               $rootScope.slide = 'slide-left';
+           }
+       });
 
-            /*        $rootScope.$on('$routeChangeStart', function () {*/
-            /* $rootScope.$on('$locationChangeStart', function () {*/
-            $rootScope.$on('$routeChangeStart', function () {
-                //event button to move backward  
-                //  console.log('routeChangeStart');
-                $rootScope.back = function () {
-                    console.log('root scope back');
-                    $rootScope.slide = 'slide-right';
-                    $window.history.back();
-                }
-                //event button item list to move forward  
-                $rootScope.next = function () {
-                    console.log('root scope nex');
-                    $rootScope.slide = 'slide-left';
-                }
-            });
+       $rootScope.$on('$routeChangeSuccess', app.routeChangeSuccess);
 
-        });
+    $rootScope.$on('$locationChangeSuccess', function (a,b,c,d) {
+       /* console.log('location change succcess ' + $location.hash());*/
+    });
+
+}]);
+
+
+    
 
 
 
@@ -132,7 +146,7 @@
         console.log('Received Event: ' + id);
     };
     $.extend(app, angular.module("myApp", ['ngRoute', 'ngAnimate']));
-    app.controllers = {};
+
 
 
 

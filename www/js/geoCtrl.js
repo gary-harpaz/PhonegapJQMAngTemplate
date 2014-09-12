@@ -1,6 +1,6 @@
 ﻿app.controller('geoCtrl', ['$scope', '$rootScope',
             function ($scope, $rootScope) {
-                console.log('geoCtrl');
+              /*  console.log('geoCtrl');*/
                 $scope.getCurrentPosition = function () {
                     navigator.geolocation.getCurrentPosition(
                     function (position) {

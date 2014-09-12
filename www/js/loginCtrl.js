@@ -3,7 +3,7 @@
 
 app.controller('loginCtrl', ['$scope', '$rootScope',
             function ($scope, $rootScope) {
-                console.log('loginCtrl');
+               /* console.log('loginCtrl');*/
                 $scope.getCurrentPosition = function () {
                 }
                 $scope.getslide = function () {
