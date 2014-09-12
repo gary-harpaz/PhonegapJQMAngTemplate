@@ -1,6 +1,6 @@
 ﻿(function (app, undefined) {
 
-    function route_factory(hash2, templateUrl, controller,selector) {
+    function route_factory(hash2, templateUrl, controller,selector,header) {
         this.hash = hash2;
         this.route_info = {
             templateUrl: templateUrl,
@@ -21,15 +21,18 @@
                 $(selector).removeClass('ui-btn-active');
             }
         };
+        this.header = header;
 
     }
+
+    app.headerSelector = '#appHeader';
 
     var nav_routes = [];
     app.nav_routes = nav_routes;
 
 
-    nav_routes.push(new route_factory('/', 'views/GeoView.html', 'geoCtrl','#navGeolocaion'));
-    nav_routes.push(new route_factory('/login', 'views/LoginView.html', 'loginCtrl','#navLogin'));
+    nav_routes.push(new route_factory('/', 'views/GeoView.html', 'geoCtrl','#navGeolocaion','Geolocaion'));
+    nav_routes.push(new route_factory('/login', 'views/LoginView.html', 'loginCtrl','#navLogin','Login'));
     
     var nav_by_controller = [];
     for (var i = 0; i < nav_routes.length; i++) {
@@ -55,11 +58,16 @@
             if (route_obj)
             {
                 route_obj.activate();
+                if (route_obj.header)
+                {
+                    $(app.headerSelector).text(route_obj.header);
+                }
             }                
             else
                 console.log('not found');
         
-        }        
+        }
+        
     }
 
 })(window.app = window.app || {});

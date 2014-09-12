@@ -87,6 +87,10 @@
        /* console.log('location change succcess ' + $location.hash());*/
     });
 
+    $rootScope.$on('$viewContentLoaded', function (a, b, c, d) {
+        $('div[ng-view]').enhanceWithin(); //causes jq mobile to enhance the new viewe coming into the dom
+    });
+
 }]);
 
 

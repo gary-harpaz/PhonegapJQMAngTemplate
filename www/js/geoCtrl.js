@@ -21,5 +21,6 @@
 
                 }
                 $scope.stam = "dsg f dsf ds dg";
+             
             }
 ])
