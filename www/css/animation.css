@@ -79,3 +79,13 @@
 	transform: translateX(0);
 	animation-name: slideinfromright;  
 }
+
+.ng-enter div[data-role=footer]
+{
+    display:none;
+}
+
+.ng-leave div[data-role=footer]
+{
+    display:none;
+}

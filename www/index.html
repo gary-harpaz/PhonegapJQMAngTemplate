@@ -31,6 +31,7 @@
        <link href="Content/jquery.mobile.theme-1.4.4.css" rel="stylesheet" />
         <link href="Content/jquery.mobile.structure-1.4.4.css" rel="stylesheet" />
         <link href="css/animation.css" rel="stylesheet" />
+        <link href="css/JQMOverrides.css" rel="stylesheet" />
         <title>Hello World</title>
         <script src="scripts/jquery-1.8.0.js"></script>
         <script type="text/javascript">
@@ -97,30 +98,25 @@
             </div>
         </div>  -->  
 
-        <!--   <div data-role="header" data-position="fixed" role="banner" class="ui-header ui-bar-a ui-header-fixed slidedown">
-                <h1 class="ui-title" role="heading" aria-level="1">Header</h1>
-                <div data-role="navbar" class="ui-navbar" role="navigation">
-                    <ul class="ui-grid-b">
-                        <li class="ui-block-a">
-                            <a data-role="button" id="navGeolocaion" class="ui-link ui-btn ui-shadow ui-corner-all" role="button">Geo</a>
-                        </li>
-                        <li class="ui-block-b">
-                            <a data-role="button" id="A2" class="ui-link ui-btn ui-shadow ui-corner-all" role="button">Login</a>
-                        </li>
-                        <li class="ui-block-c">
-                            <a data-role="button" id="A3" class="ui-link ui-btn ui-shadow ui-corner-all" role="button">Other</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>-->
+
            <div data-role="page" id="page1" ><!--ng-controller="appCtrl"-->
            <!--     <a data-role="button" id="dsgdsg" class="ui-link ui-btn ui-shadow ui-corner-all" role="button" href="GeoView.html">Geo</a>-->
-         <div data-role="header" data-position="fixed">
+            <div data-role="panel" id="menupanel" data-position="left" data-display="overlay">                
+                <h5 style="-webkit-margin-before:0em;-webkit-margin-after:0.5em">Introducing:</h5>
+                <h4 style="-webkit-margin-before:0em">AngularJS Jquery Mobile PhoneGap Template</h4>
+                <ul data-role="listview">
+                    <li ><a id="navGeolocaion" href="#/">GeoLocation</a></li>
+                     <li><a href="audi.html">Audi</a></li>
+                    <li><a href="bmw.html">BMW</a></li>
+                </ul>
+            </div>
+         <div data-role="header" data-position="fixed">               
+               <a  data-icon="bars"  data-iconpos="notext" data-corners="false" href="#menupanel"></a> 
                 <h1 id="appHeader"></h1>
                 <div data-role="navbar">
                     <ul>
                         <li>
-                            <a data-role="button" id="navGeolocaion" href="#/">Geo</a>
+                            <a data-role="button" >Geo</a>
                         </li>
                         <li>
                             <a data-role="button" id="navLogin" href="#/login">Login</a>
@@ -132,12 +128,10 @@
                 </div>
             </div>   
               <div data-role="content"  ng-view class="{{ getslide() }}"></div>
-            <!--<div style="position:relative;">
-                 
-            </div>           -->
-            <div data-role="footer" data-position="fixed">
+ 
+          <!--  <div data-role="footer" data-position="fixed">
                 <h1>Footer</h1>
-            </div>
+            </div>-->
         </div>
             
         

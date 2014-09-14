@@ -20,7 +20,8 @@
                     return $rootScope.slide;
 
                 }
-                $scope.stam = "dsg f dsf ds dg";
+                $scope.high_accuracy = true;
+                $scope.timeout = 2000;
              
             }
 ])

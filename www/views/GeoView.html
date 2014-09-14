@@ -7,22 +7,65 @@
     <!-- data-external-page="true" data-role="page" data-url="/views/GeoView.html"-->
         <!-- style="background-color:yellow;min-height:200px; -->
     <div "id="pageGeoView" > 
-       <!--<div class="ui-field-contain">
-            <input type="checkbox" name="highacc" id="highacc" class="custom">
-            <label for="highacc">High Accuracy</label>
-        </div>-->
+
+        <div data-role="tabs">
+            <div data-role="navbar">
+                <ul>
+                    <li ><a href="#getpos" class="ui-btn-active">Get Position</a></li>
+                    <li ><a href="#watchpos">Watch Position</a></li>
+                </ul>
+            </div>
+             <div id="getpos">
+
+             </div>
+              <div id="watchpos">
+
+             </div>
+        </div>
+        
+        <div data-role="header">
+        <a href="index.html" data-icon="gear" class="ui-btn-right" >Options</a>  <!--class="ui-btn-right"-->
+        <span class="ui-title" />
+            <div  class="ui-btn-left">
+                 <select name="select-function" id="select-function"  >
+                <option value="GetPos">Get Position</option>
+                 <option value="WatchPos">Watch Position</option>            
+             </select>   
+            </div>
+              
+        </div>
+
+
         <div class="ui-field-contain">
             <fieldset data-role="controlgroup">
                 <legend>Accuracy:</legend>
-                <input type="checkbox" name="hacc" id="hacc"  checked>
+                <input type="checkbox" name="hacc" id="hacc"  ng-model="high_accuracy" checked >
                 <label for="hacc">High</label>
             </fieldset>
         </div>
         <div class="ui-field-contain">
 			<label for="timeout">Timeout:</label>
-			<input type="number" name="timeout" pattern="[0-9]" id="timeout" value="3000" placeholder="Timeout value for getting current position">                			     
+			<input type="number" name="timeout" pattern="[0-9]" id="timeout" ng-model="timeout" placeholder="Timeout value for getting current position">                			     
 		</div>
+        <div data-role="collapsible" data-collapsed="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
+             <h3>Get currnet position</h3>
+              <div class="ui-grid-a"> 
+	          <div class="ui-block-a"><input  type="button" value="Activate"></div>
+	          <div class="ui-block-b"><input type="button" value="Clear"></input></div>	   
+        </div>
+         <div class="ui-grid-solo">
+	    <!--    <div class="ui-block-a"><button type="v" data-theme="b">More</button></div>-->
+        </div>
+          
+           
+        </div>
+         <div data-role="collapsible" data-collapsed="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
+             <h3>Watch Position</h3>
+        </div>
 
+           <div data-role="footer" data-position="fixed">
+                <h1>Footer</h1>
+            </div>       
     </div>
 <!--</body>
 </html>-->
