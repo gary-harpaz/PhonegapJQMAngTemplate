@@ -22,6 +22,13 @@
                 }
                 $scope.high_accuracy = true;
                 $scope.timeout = 2000;
+
+                $scope.settings = function ()
+                {
+                    $('#popupDialog').popup("open");
+                    //$('#popupDialog-popup').popup("open");
+                    
+                }
              
             }
 ])

@@ -2,3 +2,38 @@
 {
     padding:0em;
 }
+
+/* buttons inside footers*/
+[class*="ui-block-"] > button.footer-btn.ui-btn {
+    width:100%; 
+    margin-left:auto; 
+    margin-right:auto; 
+    margin-top:0px;
+    margin-bottom:0px;
+    display:block;
+
+    /* removes the glow shadow from the buttons 
+        http://stackoverflow.com/questions/16972701/how-to-remove-the-blue-halo-glow-from-jquery-mobile-input-elements-that-receive */
+        -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+}
+
+/* Button down */ /*overrides the down state of the footer buttons*/
+.ui-page-theme-a .footer-btn.ui-btn:active,
+html .ui-bar-a .footer-btn.ui-btn:active,
+html .ui-body-a .footer-btn.ui-btn:active,
+html body .ui-group-theme-a .footer-btn.ui-btn:active,
+html head + body .footer-btn.ui-btn.ui-btn-a:active {
+    background-color: 		#3388cc /*{a-active-background-color}*/;
+	border-color:	 		#3388cc /*{a-active-border}*/;
+	color: 					#fff /*{a-active-color}*/;
+	text-shadow: 0 /*{a-active-shadow-x}*/ 1px /*{a-active-shadow-y}*/ 0 /*{a-active-shadow-radius}*/ #005599 /*{a-active-shadow-color}*/;
+}
+
+/* centerlized icon with text inside footer button*/
+.footer-btn div.ui-btn-icon-left
+{
+    position:relative;
+    display:inline;
+}

@@ -80,12 +80,10 @@
 	animation-name: slideinfromright;  
 }
 
-.ng-enter div[data-role=footer]
+.ng-enter div[data-role=footer] , .ng-leave div[data-role=footer] /* fixes a glich with the footer appearance during entrace animation*/
 {
     display:none;
 }
 
-.ng-leave div[data-role=footer]
-{
-    display:none;
-}
+
+
