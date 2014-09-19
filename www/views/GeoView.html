@@ -19,7 +19,7 @@
                         <div class="ui-field-contain">
                             <fieldset data-role="controlgroup">
                                 <legend>Accuracy:</legend>
-                                <input type="checkbox" name="hacc" id="hacc"  ng-model="edit_options.high_accuracy" checked >
+                                <input my-chk type="checkbox" name="hacc" id="hacc"  ng-model="edit_options.high_accuracy" checked >
                                 <label for="hacc" >High</label>
                             </fieldset>
                         </div>
@@ -43,7 +43,10 @@
             </div>
              <div id="getpos" data-inset="true">                
                  <ul data-role="listview" style="margin:0em;">
-                    <li><div data-role="collapsible" data-mini="true"><h4>header</h4><p>Some Content</p></div></li>          
+                    <!--<li><div data-role="collapsible" data-mini="true" data-inset="true"><h4>header</h4><p>Some Content</p></div></li>       -->   
+                     <li id="li{{$index + 1}}" my-enhance data-role="collapsible" data-mini="true" data-inset="true" data-collapsed-icon="false" ng-repeat="pos in poisitions">
+                         <h4>{{pos.timestamp}} - x: <span>{{pos.latitude}}</span> y: <span>{{pos.longitude}}</span>  ±: {{pos.accuracy}} </h4><p>Some Content</p>
+                      </li>       
                 </ul>
              </div>
               <div id="watchpos">
@@ -60,9 +63,9 @@
            <div data-role="footer" data-position="fixed">
                 <!--<h1>Footer</h1>-->
                <div class="ui-grid-b">	            
-                <div class="ui-block-a"><button  class="footer-btn"  data-mini="true" data-corners="false" data-shadow="false" data-enhanced="true"><div class="ui-icon-location ui-btn-icon-left" style="left:-5px" >Go</div></button></div> 
+                <div class="ui-block-a"><button ng-click="measureposition()"  class="footer-btn"  data-mini="true" data-corners="false" data-shadow="false" data-enhanced="true"><div class="ui-icon-location ui-btn-icon-left" style="left:-5px" >Go</div></button></div> 
 	            <div class="ui-block-b"><button  class="footer-btn"  data-mini="true" ><div class="ui-icon-delete ui-btn-icon-left" style="left:-5px">Clear</div></div>
-	            <div class="ui-block-c"><button ng-click="settings()"  class="footer-btn"  data-mini="true" ><div class="ui-icon-gear ui-btn-icon-left" style="left:-5px">Options</div></div>
+	            <div class="ui-block-c"><button ng-click="settings()" my-popup-open="popupDialog"  class="footer-btn"  data-mini="true" ><div class="ui-icon-gear ui-btn-icon-left" style="left:-5px">Options</div></div>
               </div>
             </div>       
     </div>

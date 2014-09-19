@@ -91,7 +91,52 @@
         $('div[ng-view]').enhanceWithin(); //causes jq mobile to enhance the new viewe coming into the dom
     });
 
-}]);
+    }]);
+        app.directive("myPopupOpen", function () {
+            var linkFunction = function (scope, element, attributes) {
+
+                $(element).click(function () {
+                    var popup_id = attributes["myPopupOpen"];
+                    $('#' + popup_id).popup("open");
+                });
+
+            };
+
+            return {
+                restrict: "A",
+                link: linkFunction
+            };
+        });
+
+        app.directive('myChk', function () {
+            return {
+                restrict: 'A',
+                require: 'ngModel',
+                link: function (scope, elm, attr, ngModel) {
+                    scope.$watch(
+                        function () { return ngModel.$modelValue },
+                        function (newVal) {
+                            var s = $(elm);
+                            if (s.prop("checked") !== newVal)
+                               s.prop("checked", newVal).checkboxradio('refresh');
+                        }
+                    );
+                }
+            }
+        });
+
+        app.directive("myEnhance", function () {
+            var linkFunction = function (scope, element, attributes) {                
+                $(element).parent().enhanceWithin();
+
+            };
+
+            return {
+                restrict: "A",
+                link: linkFunction
+            };
+        });
+
 
 
     
