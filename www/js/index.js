@@ -198,7 +198,14 @@
 
 
 
+    //global constants and helper functions
 
+    app.time_zone_offset = new Date().getTimezoneOffset();
+
+    app.GMTDTToCurrentTimeZone=function (date)
+    {
+        return new Date(date.getTime() - app.time_zone_offset * 60000);
+    };
 
 
 

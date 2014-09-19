@@ -24,30 +24,6 @@
                 $scope.poisitions = [];
 
                 $scope.measureposition = function () {
-                  /*  var options = {
-                        timeout: $scope.options.timeout,
-                        enableHighAccuracy: $scope.options.high_accuracy
-                    };
-                    var result = {};
-                    //$scope.poisitions.push(result);
-                    // result.timestamp = 14;
-                    $scope.poisitions.push(result);
-                    navigator.geolocation.getCurrentPosition(
-                    function (position) {
-                        $.extend(result, position.coords);
-                        result.timestamp = position.timestamp;
-                        result.error_code = undefined;
-                        result.error_message = undefined;
-
-
-                    }
-                    , function (positionErrorCallback) {
-                        result.error_code = positionErrorCallback.code;
-                        result.error_message = positionErrorCallback.message;
-                    },
-                    options
-                  );*/
-
 
 
 
@@ -56,60 +32,55 @@
                         timeout: $scope.options.timeout,
                         enableHighAccuracy: $scope.options.high_accuracy
                     };
-                    var result = {};
-                    //var deferred = $q.defer();
-
-                    var done = false;
-
-                    return
-                     new $q(function (resolve, reject) {
-                        // perform some asynchronous operation, resolve or reject the promise when appropriate.
-                        navigator.geolocation.getCurrentPosition(
-                   function (position) {
-                       console.log('1');
-                       $.extend(result, position.coords);
-                       result.timestamp = position.timestamp;
-                       result.error_code = undefined;
-                       result.error_message = undefined;
-                       done = true;
+                    
+                    var deferred = $q.defer();
 
 
-                   }
-                   , function (positionErrorCallback) {
-                       console.log('2');
-                       result.error_code = positionErrorCallback.code;
-                       result.error_message = positionErrorCallback.message;
-                       done = true;
-                   },
-                   options
-                 );
-                        var number = setInterval(function () {
-                            if (pollStatus > 0) {
-                                resolve(polledValue);
-                            } else if (pollStatus < 0) {
-                                reject(polledValue);
-                            } else {
-                                pollStatus = pollAgain(function (value) {
-                                    console.log('3');
-                                    polledValue = value;
-                                    if (!done)
-                                        return 0;
-                                    else
-                                        return 1;
-                                });
-                            }
-                        }, 10000);
-                    }).
-                      then(function (value) {
-                          // handle success
-                          console.log('4');
-                          $scope.poisitions.push(result);
-                      }, function (reason) {
-                          console.log('5');
-                          // handle failure
-                      });
+                    navigator.geolocation.getCurrentPosition(
+                  function (position) {                      
+                      var result = {};
+                      $.extend(result, position.coords);
 
-                     $rootScope.apply();
+
+                 
+                      //                      var dt=app.GMTDTToCurrentTimeZone(new Date(position.timestamp));
+                      var pad = "00";
+                      var dt = new Date(position.timestamp);
+                      var h = (dt.getHours() + 1).toString();                      
+                      h = pad.substring(0, pad.length - h.length) + h;
+                      var m = dt.getMinutes().toString();
+                      m = pad.substring(0, pad.length - m.length) + m;
+                      var s = dt.getSeconds().toString();
+                      s = pad.substring(0, pad.length - s.length) + s;
+                      var ms = dt.getMilliseconds().toString();
+                      pad = "000";
+                      ms = pad.substring(0, pad.length - ms.length) + ms;
+                      result.timestamp = h + ":" + m + ":" + s + "." + ms;
+
+                      result.error_code = undefined;
+                      result.error_message = undefined;
+                      deferred.resolve(result);
+                      
+
+
+                  }
+                  , function (positionErrorCallback) {
+                      var result = {};                      
+                      result.error_code = positionErrorCallback.code;
+                      result.error_message = positionErrorCallback.message;
+                      deferred.resolve(result);
+                      
+                  },
+                  options
+                );
+                    deferred.promise.then(function (value) {                        
+                        $scope.poisitions.push(value);
+
+                    });
+                    
+
+                    
+              
 
                 };
 
