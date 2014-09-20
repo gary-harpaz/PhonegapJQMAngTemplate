@@ -39,10 +39,23 @@
                     navigator.geolocation.getCurrentPosition(
                   function (position) {                      
                       var result = {};
-                      $.extend(result, position.coords);
+
+                     
+
+                      result.latitude = position.coords.latitude.toFixed(5);
+                      result.longitude = position.coords.longitude.toFixed(5);
+                      if (position.coords.altitude)
+                          result.altitude = position.coords.altitude.toString();
+                      if (position.coords.accuracy)
+                          result.accuracy = position.coords.accuracy.toString();
+                      if (position.coords.altitudeAccuracy)
+                          result.altitudeAccuracy = position.coords.altitudeAccuracy.toString();
+                      if (position.coords.heading)
+                          result.heading = position.coords.heading.toString();
+                      if (position.coords.speed)
+                        result.speed = position.coords.speed.toString();
 
 
-                 
                       //                      var dt=app.GMTDTToCurrentTimeZone(new Date(position.timestamp));
                       var pad = "00";
                       var dt = new Date(position.timestamp);
@@ -101,10 +114,14 @@
 
                 $scope.settings = function () {
                     $.extend($scope.edit_options, $scope.options);
-                }
+                };
                 $scope.settings_ok = function () {
                     $.extend($scope.options, $scope.edit_options);
-                }
+                };
+
+                $scope.clearpos = function () {
+                    $scope.poisitions.length = 0;
+                };
 
             }
 ])
