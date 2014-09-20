@@ -194,6 +194,13 @@
 
         console.log('Received Event: ' + id);
     };
+
+
+    $(function () {
+        FastClick.attach(document.body);
+    });
+
+
     $.extend(app, angular.module("myApp", ['ngRoute', 'ngAnimate']));
 
 
