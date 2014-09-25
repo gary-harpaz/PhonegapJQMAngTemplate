@@ -70,6 +70,7 @@
                       pad = "000";
                       ms = pad.substring(0, pad.length - ms.length) + ms;
                       result.timestamp = h + ":" + m + ":" + s + "." + ms;
+                      result.is_success = true;
 
                       result.error_code = undefined;
                       result.error_message = undefined;
@@ -79,7 +80,8 @@
 
                   }
                   , function (positionErrorCallback) {
-                      var result = {};                      
+                      var result = {};
+                      result.is_success = false;
                       result.error_code = positionErrorCallback.code;
                       result.error_message = positionErrorCallback.message;
                       deferred.resolve(result);

@@ -45,7 +45,8 @@
                  <ul data-role="listview" data-inset="true" >        
                      <!--data-role="collapsible" data-collapsed-icon="false" -->             
                      <li id="li{{$index + 1}}" my-enhance    ng-repeat="pos in poisitions" ng-click="pos.toggle_expanded()">
-                         <a data-role="button"><p><strong>{{$index + 1}}) {{pos.timestamp}} - x: <span>{{pos.latitude}}</span> y: <span>{{pos.longitude}}</span>  ±: {{pos.accuracy}} </strong></p>
+                         <a data-role="button"><p ng-show="pos.is_success"><strong>{{$index + 1}}) {{pos.timestamp}} - x: <span>{{pos.latitude}}</span> y: <span>{{pos.longitude}}</span>  ±: {{pos.accuracy}} </strong></p>
+                          <p ng-hide="pos.is_success"><strong>{{$index + 1}}) Error code: {{pos.error_code}} message: {{pos.error_message}}</strong></p>
                          <p ng-show="pos.is_expanded">speed: {{pos.speed}} heading: {{pos.heading}} altitude: {{pos.altitude}}</p></a>
                       </li>       
                 </ul>
