@@ -25,7 +25,7 @@
 
                 $scope.measureposition = function () {
 
-
+                    $.mobile.loading('show');
 
 
                     var options = {
@@ -88,6 +88,7 @@
                   options
                 );
                     deferred.promise.then(function (value) {
+                        $.mobile.loading('hide');
                         value.is_expanded = false;
                         value.toggle_expanded = function ()
                         {
@@ -127,7 +128,7 @@
 
                 $scope.clearpos = function () {
                     $scope.poisitions.length = 0;
-                };
+                };         
 
             }
 ])
