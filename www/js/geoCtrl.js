@@ -44,12 +44,13 @@
 
                       result.latitude = position.coords.latitude.toFixed(5);
                       result.longitude = position.coords.longitude.toFixed(5);
-                      if (position.coords.altitude)
-                          result.altitude = position.coords.altitude.toString();
+                     
                       if (position.coords.accuracy)
                           result.accuracy = position.coords.accuracy.toString();
                       if (position.coords.altitudeAccuracy)
                           result.altitudeAccuracy = position.coords.altitudeAccuracy.toString();
+                      if (position.coords.altitude)
+                          result.altitude = position.coords.altitude.toString();
                       if (position.coords.heading)
                           result.heading = position.coords.heading.toString();
                       if (position.coords.speed)
@@ -86,7 +87,12 @@
                   },
                   options
                 );
-                    deferred.promise.then(function (value) {                        
+                    deferred.promise.then(function (value) {
+                        value.is_expanded = false;
+                        value.toggle_expanded = function ()
+                        {
+                            value.is_expanded = !value.is_expanded;
+                        }
                         $scope.poisitions.push(value);
 
                     });

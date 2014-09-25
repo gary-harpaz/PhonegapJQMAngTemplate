@@ -41,11 +41,12 @@
                     <li ><a href="#watchpos">Watch Position</a></li>
                 </ul>
             </div>
-             <div id="getpos" data-inset="true">                
-                 <ul data-role="listview" style="margin:0em;">
-                    <!--<li><div data-role="collapsible" data-mini="true" data-inset="true"><h4>header</h4><p>Some Content</p></div></li>       -->   
-                     <li id="li{{$index + 1}}" my-enhance data-role="collapsible" data-mini="true" data-inset="true" data-collapsed-icon="false" ng-repeat="pos in poisitions">
-                         <h6>{{pos.timestamp}} - x: <span>{{pos.latitude}}</span> y: <span>{{pos.longitude}}</span>  ±: {{pos.accuracy}} </h6><p>Some Content</p>
+             <div id="getpos" >                <!--data-inset="true"-->
+                 <ul data-role="listview" data-inset="true" >        
+                     <!--data-role="collapsible" data-collapsed-icon="false" -->             
+                     <li id="li{{$index + 1}}" my-enhance    ng-repeat="pos in poisitions" ng-click="pos.toggle_expanded()">
+                         <a data-role="button"><p><strong>{{$index + 1}}) {{pos.timestamp}} - x: <span>{{pos.latitude}}</span> y: <span>{{pos.longitude}}</span>  ±: {{pos.accuracy}} </strong></p>
+                         <p ng-show="pos.is_expanded">speed: {{pos.speed}} heading: {{pos.heading}} altitude: {{pos.altitude}}</p></a>
                       </li>       
                 </ul>
              </div>
