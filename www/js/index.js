@@ -185,6 +185,7 @@
     };
 
     app.receivedEvent = function (id) {
+        /*
         var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
@@ -192,7 +193,7 @@
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
 
-        console.log('Received Event: ' + id);
+        console.log('Received Event: ' + id);*/
     };
 
 
@@ -213,6 +214,16 @@
     {
         return new Date(date.getTime() - app.time_zone_offset * 60000);
     };
+
+    $(document).ready(function(){
+        if (app.IsDesktop)
+        {
+            //$(document).trigger('deviceready');
+            var event = new CustomEvent("deviceready");
+            // Dispatch/Trigger/Fire the event
+            document.dispatchEvent(event);
+        }            
+    })
 
 
 

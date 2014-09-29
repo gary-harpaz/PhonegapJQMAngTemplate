@@ -37,8 +37,8 @@
         <div data-role="tabs">
             <div data-role="navbar">
                 <ul>
-                    <li ><a href="#getpos" class="ui-btn-active">Get Position</a></li>
-                    <li ><a href="#watchpos">Watch Position</a></li>
+                    <li ><a href="#getpos" class="ui-btn-active" ng-click="get_pos_nav()">Get Position</a></li>
+                    <li ><a href="#watchpos" ng-click="watch_pos_nav()">Watch Position</a></li>
                 </ul>
             </div>
              <div id="getpos" >                <!--data-inset="true"-->                
@@ -65,7 +65,11 @@
            <div data-role="footer" data-position="fixed">
                 <!--<h1>Footer</h1>-->
                <div class="ui-grid-b">	            
-                <div class="ui-block-a"><button ng-click="measureposition()"  class="footer-btn"  data-mini="true" data-corners="false" data-shadow="false" data-enhanced="true"><div class="ui-icon-location ui-btn-icon-left" style="left:-5px" >Go</div></button></div> 
+                <div class="ui-block-a">
+                    <button ng-show="show_get_pos" ng-click="measureposition()"  class="footer-btn"  data-mini="true" data-corners="false" data-shadow="false" data-enhanced="true"><div class="ui-icon-location ui-btn-icon-left" style="left:-5px" >Go</div></button>
+                    <button ng-show="show_watch_pos" ng-click="measureposition()"  class="footer-btn"  data-mini="true" data-corners="false" data-shadow="false" data-enhanced="true"><div class="ui-icon-eye ui-btn-icon-left" style="left:0px" >Watch</div></button>
+                    <button ng-show="show_stop_watch" ng-click="measureposition()"  class="footer-btn"  data-mini="true" data-corners="false" data-shadow="false" data-enhanced="true"><div class="ui-icon-forbidden ui-btn-icon-left" style="left:-5px" >Stop</div></button>
+                </div> 
 	            <div class="ui-block-b"><button ng-click="clearpos()"  class="footer-btn"  data-mini="true" ><div class="ui-icon-delete ui-btn-icon-left" style="left:-5px">Clear</div></div>
 	            <div class="ui-block-c"><button ng-click="settings()" my-popup-open="popupDialog"  class="footer-btn"  data-mini="true" ><div class="ui-icon-gear ui-btn-icon-left" style="left:-5px">Options</div></div>
               </div>

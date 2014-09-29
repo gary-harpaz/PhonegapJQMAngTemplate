@@ -50,7 +50,7 @@
         <script src="scripts/fastclick.js"></script>
         <script type="text/javascript">
             //http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
-            (function ($) {
+            (function ($, app, undefined) {
                 $.QueryString = (function (a) {
                     if (a == "") return {};
                     var b = {};
@@ -61,17 +61,19 @@
                     }
                     return b;
                 })(window.location.search.substr(1).split('&'))
-            })(jQuery);
+            })(jQuery, window.app = window.app || {});
             if ($.QueryString["dev"] == "Y") {
                 //    console.log('user real services');
 
                 //window.onerror = function (message, url, lineNumber) {
                 //    console.log("Error: " + message + " in " + url + " at line " + lineNumber);
                 //}
+                window.app.IsDesktop = true;
                 document.write('<script  src="js/cordova.mock.js"><\/script>');
             }
             else {
                 // console.log('user mock services');
+                window.app.IsDesktop = false;
                 document.write('<script  src="cordova.js"><\/script>');
             }
 

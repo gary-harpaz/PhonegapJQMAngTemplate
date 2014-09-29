@@ -130,7 +130,33 @@
 
                 $scope.clearpos = function () {
                     $scope.poisitions.length = 0;
-                };         
+                };
+
+                $scope.show_get_pos = true;
+                $scope.show_watch_pos = false;
+                $scope.show_stop_watch = false;
+                $scope.current_watch_id = undefined;
+
+                $scope.watch_pos_nav = function () {
+                    $scope.show_get_pos = false;
+                    if ($scope.current_watch_id)
+                    {
+                        $scope.show_watch_pos = false;
+                        $scope.show_stop_watch = true;
+                    }
+                    else
+                    {
+                        $scope.show_watch_pos = true;
+                        $scope.show_stop_watch = false;
+                    }
+
+                }
+                $scope.get_pos_nav = function () {
+                    $scope.show_watch_pos = false;
+                    $scope.show_stop_watch = false;
+                    $scope.show_get_pos = true;
+
+                }
 
             }
 ])
